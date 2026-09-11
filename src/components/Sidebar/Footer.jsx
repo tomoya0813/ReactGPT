@@ -9,16 +9,18 @@ const Footer = ({ commonStyle, shouldShowContent }) => {
   return (
     <div className={`${commonStyle.padding} border-t ${commonStyle.borderColor}`} >
       <a href='https://github.com/tomoya0813'
-        className={`flex items-center gap-2 ${commonStyle.hover}`}>
+        className={`flex items-center gap-2 ${commonStyle.hover}  ${commonStyle.borderRadius}`}>
         <FaGithub size={27} className="shrink-0" />
 
         {shouldShowContent && (<p className={`
           text-blue-500 text-xl
             underline
           hover:text-blue-700
-           transition-opacity ${commonStyle.transition}
+            transition-opacity ${commonStyle.transition}
+            shrink-0
+            whitespace-nowrap
           ${sidebarIsOpened ? 'opacity-100' : 'opacity-0'}
-          `}> GitHub</p>)}
+          `}>GitHub</p>)}
 
       </a>
     </div >
