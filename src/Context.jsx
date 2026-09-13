@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const AppContext = createContext();
 
@@ -14,13 +14,21 @@ function ContextProvider({ children }) {
     }
 
 
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth)
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [])
+
 
     return (
         <AppContext.Provider value={{
             history, setHistory,
             currentChatId, setCurrentChatId,
             sidebarIsOpened, setSidebarIsOpened,
-            texts, setCurrentTexts
+            texts, setCurrentTexts,
+            windowWidth
         }}>
             {children}
         </AppContext.Provider>
