@@ -44,7 +44,7 @@ function App() {
         <Sidebar sidebarTransition={sidebarTransition} sidebarTransitionTime={sidebarTransitionTime} />
       </div>
       <div className={`h-screen flex-1 `}>
-        <MainArea />
+        <MainArea layoutState={layoutState} />
       </div>
     </div >
   );
