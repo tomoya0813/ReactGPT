@@ -4,13 +4,21 @@ import UserActions from './UserActions';
 import TextDisplay from './TextDisplay';
 import { v4 as uuidv4 } from 'uuid';
 
-const MainArea = () => {
+const MainArea = ({ layoutState }) => {
 
   const { history, setHistory,
     currentChatId, setCurrentChatId,
-    texts, setCurrentTexts, } = useContext(AppContext);
+    texts, setCurrentTexts, sidebarIsOpened, windowWidth } = useContext(AppContext);
 
-
+  const userActionsPosition = () => {
+    const sideW = layoutState.find(state => state.sidebarIsOpened === sidebarIsOpened)
+      .sidebarWidth;
+    const mainW = windowWidth - sideW;
+    const left = sideW + (mainW / 2);
+    return {
+      left, transform: 'translateX(-50%)'
+    }
+  }
   const handleSubmit = () => {
     if (texts[currentChatId].trim() === '') return;
 
@@ -30,13 +38,13 @@ const MainArea = () => {
   }
 
   const commonStyle = {
-    width: 'w-175',
+    width: 'lg:w-175 md:w-130'
   }
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen">
       {currentChatId === 'start' ? (
-        <div className="flex-1 flex items-center justify-center">
+        <div className={`fixed bottom-1/2 `} style={userActionsPosition()}>
           <UserActions
             text={texts[currentChatId] || ''}
             setCurrentTexts={setCurrentTexts}
@@ -46,10 +54,10 @@ const MainArea = () => {
         </div>
       ) : (
         <>
-          <div className="flex-1 overflow-y-auto">
+          <div className="h-screen overflow-y-auto  scrollbar-gutter-both">
             <TextDisplay commonStyle={commonStyle} />
           </div>
-          <div className="pb-7 flex justify-center">
+          <div className={`fixed bottom-7`} style={userActionsPosition()}>
             <UserActions
               text={texts[currentChatId] || ''}
               setCurrentTexts={setCurrentTexts}
