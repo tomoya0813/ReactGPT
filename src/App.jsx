@@ -23,20 +23,22 @@ function App() {
   })
 
 
-  const sidebarTransitionTime = 400;
+  const sidebarTransitionTime = 75;
   const sidebarTransition = `duration-${sidebarTransitionTime}`;
+  // console.log(sidebarTransition)
 
   return (
     <div className="flex h-screen">
       <div
         style={{
-          width: `${currentLayout.sidebarWidth}px`
+          width: `${currentLayout.sidebarWidth}px`,
+          transitionDuration: `${sidebarTransitionTime}ms`
         }}
         className={`
         h-screen
         border-r 
         border-[rgba(0,0,0,0.05)] 
-         transition-[width] ${sidebarTransition}
+         transition-[width]
         `}
       >
         <Sidebar sidebarTransition={sidebarTransition} sidebarTransitionTime={sidebarTransitionTime} />
