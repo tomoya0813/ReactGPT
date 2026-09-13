@@ -7,10 +7,11 @@ import { AppContext } from '../../context.jsx';
 
 const Sidebar = ({ sidebarTransition, sidebarTransitionTime }) => {
 
+
   const { sidebarIsOpened, } = useContext(AppContext);
+  // ↑sidebarの開閉確認　即時反映
+  // ↓開閉後の遅延
   const [shouldShowContent, setShouldShowContent] = useState(true);
-
-
 
   useEffect(() => {
     if (sidebarIsOpened) {
@@ -32,7 +33,8 @@ const Sidebar = ({ sidebarTransition, sidebarTransitionTime }) => {
     hover: 'hover:bg-gray-100',
     borderColor: 'border-gray-200',
     borderRadius: 'rounded-[10px]',
-    transition: sidebarTransition
+    transition: sidebarTransition,
+    // TESTTRANSITION: '10000ms'
   }
 
   return (
