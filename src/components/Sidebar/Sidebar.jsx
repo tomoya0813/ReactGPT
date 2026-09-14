@@ -8,7 +8,7 @@ import { AppContext } from '../../context.jsx';
 const Sidebar = ({ sidebarTransition, sidebarTransitionTime }) => {
 
 
-  const { sidebarIsOpened, } = useContext(AppContext);
+  const { sidebarIsOpened, setSidebarIsOpened, isMobile } = useContext(AppContext);
   // ↑sidebarの開閉確認　即時反映
   // ↓開閉後の遅延
   const [shouldShowContent, setShouldShowContent] = useState(true);
@@ -26,6 +26,10 @@ const Sidebar = ({ sidebarTransition, sidebarTransitionTime }) => {
   }, [sidebarIsOpened])
 
 
+  const handleMobileSidebar = () => {
+    if (!isMobile) return;
+    setSidebarIsOpened(!sidebarIsOpened)
+  }
 
   const commonStyle = {
     padding: 'p-2.5',
@@ -38,11 +42,11 @@ const Sidebar = ({ sidebarTransition, sidebarTransitionTime }) => {
   }
 
   return (
-    <div className='h-full flex flex-col justify-between'>
-      <Header commonStyle={commonStyle} shouldShowContent={shouldShowContent} />
-      <ChatHistory className={`flex-1 overflow-y-auto`} commonStyle={commonStyle} shouldShowContent={shouldShowContent} />
+    < div className='h-full flex flex-col justify-between' >
+      <Header commonStyle={commonStyle} shouldShowContent={shouldShowContent} handleMobileSidebar={handleMobileSidebar} />
+      <ChatHistory className={`flex-1 overflow-y-auto`} commonStyle={commonStyle} shouldShowContent={shouldShowContent} handleMobileSidebar={handleMobileSidebar} />
       <Footer commonStyle={commonStyle} shouldShowContent={shouldShowContent} />
-    </div>
+    </div >
   )
 }
 
