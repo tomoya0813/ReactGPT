@@ -2,7 +2,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { useContext } from "react";
 import { AppContext } from "../../context.jsx";
 
-const ChatHistory = ({ className, commonStyle, shouldShowContent }) => {
+const ChatHistory = ({ className, commonStyle, shouldShowContent, handleMobileSidebar }) => {
 
     const { history, setHistory,
         currentChatId, setCurrentChatId,
@@ -13,6 +13,11 @@ const ChatHistory = ({ className, commonStyle, shouldShowContent }) => {
         if (currentChatId === id)
             setCurrentChatId('start')
     }
+
+    // console.log(history)
+
+    const isLastHistory = history.length === 1;
+
     return (
         shouldShowContent && (
             <div className={`
@@ -32,7 +37,10 @@ const ChatHistory = ({ className, commonStyle, shouldShowContent }) => {
                         ${commonStyle.hover}
                          ${e.id === currentChatId && commonStyle.bgColor}`}
                         key={e.id}
-                        onClick={() => setCurrentChatId(e.id)}>
+                        onClick={() => {
+                            setCurrentChatId(e.id);
+                            handleMobileSidebar();
+                        }}>
                         <div className="shrink-0 whitespace-nowrap">要約内容</div>
                         <button className="
                         cursor-pointer 
@@ -40,6 +48,7 @@ const ChatHistory = ({ className, commonStyle, shouldShowContent }) => {
                             onClick={(event) => {
                                 event.stopPropagation();
                                 deleteHistory(e.id);
+                                if (isLastHistory) handleMobileSidebar();
                             }}><FaRegTrashAlt /></button>
                     </div>
                 ))}
