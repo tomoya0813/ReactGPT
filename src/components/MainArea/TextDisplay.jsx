@@ -4,7 +4,7 @@ import { FaRegMoon } from "react-icons/fa";
 import { useContext, useRef, useEffect } from 'react';
 import { AppContext } from '../../context.jsx';
 
-const TextDisplay = () => {
+const TextDisplay = ({ contentsWidth }) => {
     const { history, currentChatId } = useContext(AppContext);
     const ref = useRef(null)
 
@@ -18,10 +18,12 @@ const TextDisplay = () => {
     }, [currentChatId, currentLastMessageIndex])
 
     return (
-        <div className='
+        <div className={`
+            ${contentsWidth}   
+            mx-auto
             pt-20 pb-50 
             flex flex-col items-center gap-12
-            '>
+            `}>
             {currentChat && currentChat.messages.map((e, index) => (
                 <div key={index}
                     ref={index === currentLastMessageIndex ? ref : null}
@@ -44,19 +46,19 @@ const TextDisplay = () => {
                         <ul className='flex flex-col gap-2'>
                             <li className="flex items-center gap-2">
                                 <FaGithub />
-                                <a href='https://github.com/tomoya0813' className='text-blue-500 underline hover:text-blue-700'>
+                                <a href='https://github.com/tomoya0813' target="_blank" className='text-blue-500 underline hover:text-blue-700'>
                                     GitHub
                                 </a>
                             </li>
                             <li className="flex items-center gap-2">
                                 <IoMailSharp />
-                                <a href='https://tomoya0813.github.io/portfolio/contact' className='text-blue-500 underline hover:text-blue-700'>
+                                <a href='https://tomoya0813.github.io/portfolio/contact' target="_blank" className='text-blue-500 underline hover:text-blue-700'>
                                     Email
                                 </a>
                             </li>
                             <li className="flex items-center gap-2">
                                 <FaRegMoon />
-                                <a href='https://tomoya0813.github.io/portfolio/about/index.html' className='text-blue-500 underline hover:text-blue-700'>
+                                <a href='https://tomoya0813.github.io/portfolio/about/index.html' target="_blank" className='text-blue-500 underline hover:text-blue-700'>
                                     MY About
                                 </a>
                             </li>
