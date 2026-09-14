@@ -5,9 +5,9 @@ import { useContext } from 'react';
 import { AppContext } from '../../context.jsx';
 
 
-const Header = ({ commonStyle, shouldShowContent }) => {
+const Header = ({ commonStyle, shouldShowContent, handleMobileSidebar }) => {
 
-    const { setSidebarIsOpened, sidebarIsOpened, setCurrentChatId } = useContext(AppContext);
+    const { setSidebarIsOpened, sidebarIsOpened, setCurrentChatId, isMobile } = useContext(AppContext);
 
     return (
         <header className={`border-b ${commonStyle.borderColor}
@@ -26,8 +26,11 @@ const Header = ({ commonStyle, shouldShowContent }) => {
                             ${commonStyle.transition}
                             transition-opacity
                             ${sidebarIsOpened ? 'opacity-100' : 'opacity-0'}`}
-                            onClick={() => setCurrentChatId('start')}>
-                            ReactGPT
+                            onClick={() => {
+                                setCurrentChatId('start');
+                                handleMobileSidebar()
+                            }}>
+                            {isMobile ? <FaReact size={25} className="shrink-0 cursor-pointer" /> : 'ReactGPT'}
                         </h1>
                         <button className={`
                         flex gap-1.25 
@@ -42,11 +45,11 @@ const Header = ({ commonStyle, shouldShowContent }) => {
                         </button>
                     </>
                 )}
-                {!shouldShowContent && (
+                {!shouldShowContent && !isMobile ? (
                     <button className='cursor-pointer  absolute left-0'
                         type="button" onClick={() => setSidebarIsOpened(true)}>
-                        <FaReact size={25} className="shrink-0 cursor-ew-resize" />
-                    </button>)}
+                        <FaReact size={25} className="shrink-0 cursor-pointer" />
+                    </button>) : <></>}
             </div>
 
 
@@ -59,7 +62,10 @@ const Header = ({ commonStyle, shouldShowContent }) => {
                         cursor-pointer
                         ${commonStyle.borderRadius}
                         ${commonStyle.hover}`}
-                onClick={() => setCurrentChatId('start')}>
+                onClick={() => {
+                    setCurrentChatId('start');
+                    handleMobileSidebar();
+                }}>
                 <HiOutlinePencilSquare size={25} className="shrink-0" />
 
                 {shouldShowContent && (
