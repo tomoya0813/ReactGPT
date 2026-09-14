@@ -15,7 +15,6 @@ function UserActions({ text, setCurrentTexts, handleSubmit }) {
     return (
         <>
             <div className={`
-         
              border border-solid border-gray-300 rounded-[30px]
              shadow-sm bg-white`}>
                 <form
