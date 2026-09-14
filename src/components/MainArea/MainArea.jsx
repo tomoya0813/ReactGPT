@@ -12,7 +12,7 @@ const MainArea = ({ layoutState }) => {
 
   const config = {
     padding: 20,
-    contentsWidth: 'lg:w-175 md:w-130 w-full'
+    contentsWidth: 'lg:w-175 md:w-130 '
   }
 
 
@@ -43,7 +43,8 @@ const MainArea = ({ layoutState }) => {
   const userActionsPosition = () => {
     if (isMobile) {
       return {
-        left: 0,
+        left: commonStyle.UserActionsPadding,
+        right: commonStyle.UserActionsPadding
       }
     }
     const sideW = layoutState.find(state => state.sidebarIsOpened === sidebarIsOpened)
@@ -85,7 +86,7 @@ const MainArea = ({ layoutState }) => {
 
 
   return (
-    <div className="h-screen">
+    <div className="h-screen w-full">
       {currentChatId === 'start' ? (
         <>
           {isMobile &&
@@ -94,11 +95,9 @@ const MainArea = ({ layoutState }) => {
               <BiAlignLeft size={25} />
             </button>}
 
-          <div className={`fixed bottom-1/2 ${config.contentsWidth}`}
+          <div className={`fixed bottom-1/2  ${config.contentsWidth}`}
             style={{
               ...userActionsPosition(),
-              paddingLeft: `${commonStyle.UserActionsPadding}px`,
-              paddingRight: `${commonStyle.UserActionsPadding}px`,
             }}>
             <UserActions
               text={texts[currentChatId] || ''}
@@ -115,15 +114,16 @@ const MainArea = ({ layoutState }) => {
               <BiAlignLeft size={25} />
             </button>}
           <div ref={scrollRef}
-            className="h-screen overflow-y-auto scrollbar-gutter-both  w-full"
-            style={{ padding: `${commonStyle.displayPadding}px` }} >
-            <TextDisplay />
+            className="h-screen scrollbar-gutter-both  w-full"
+            style={{
+              padding: `${commonStyle.displayPadding}px`,
+              overflowY: (isMobile && sidebarIsOpened) ? 'hidden' : 'auto'
+            }} >
+            <TextDisplay contentsWidth={config.contentsWidth} />
           </div>
           <div className={`fixed bottom-7 ${config.contentsWidth}`}
             style={{
               ...userActionsPosition(),
-              paddingLeft: `${commonStyle.UserActionsPadding}px`,
-              paddingRight: `${commonStyle.UserActionsPadding}px`,
             }}>
             <UserActions
               text={texts[currentChatId] || ''}
