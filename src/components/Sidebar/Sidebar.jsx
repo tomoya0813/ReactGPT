@@ -6,7 +6,17 @@ import { AppContext } from '../../context.jsx';
 
 
 const Sidebar = ({ sidebarTransition, sidebarTransitionTime }) => {
-
+  // ===================================================
+  const commonStyle = {
+    padding: 'p-2.5',
+    bgColor: 'bg-gray-100',
+    hover: 'hover:bg-gray-100',
+    borderColor: 'border-gray-200',
+    borderRadius: 'rounded-[10px]',
+    transition: sidebarTransition,
+    // TESTTRANSITION: '10000ms'
+  }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   const { sidebarIsOpened, setSidebarIsOpened, isMobile } = useContext(AppContext);
   // ↑sidebarの開閉確認　即時反映
@@ -31,15 +41,6 @@ const Sidebar = ({ sidebarTransition, sidebarTransitionTime }) => {
     setSidebarIsOpened(!sidebarIsOpened)
   }
 
-  const commonStyle = {
-    padding: 'p-2.5',
-    bgColor: 'bg-gray-100',
-    hover: 'hover:bg-gray-100',
-    borderColor: 'border-gray-200',
-    borderRadius: 'rounded-[10px]',
-    transition: sidebarTransition,
-    // TESTTRANSITION: '10000ms'
-  }
 
   return (
     <div className='h-full flex flex-col justify-between' >
