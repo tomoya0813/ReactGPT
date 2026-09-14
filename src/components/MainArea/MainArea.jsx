@@ -12,6 +12,7 @@ const MainArea = ({ layoutState }) => {
 
   const config = {
     padding: 20,
+    // ↓モバイル以外の幅設定、モバイルはleftとrightで幅制御
     contentsWidth: 'lg:w-175 md:w-130 '
   }
 
@@ -34,7 +35,8 @@ const MainArea = ({ layoutState }) => {
     }
   }, [currentChatId]);
 
-
+  //scroll-gutterでdisplayの表示範囲が狭くなり、useractionの幅とずれるため、
+  // padding差分を追加
   const commonStyle = {
     displayPadding: config.padding,
     UserActionsPadding: gutterWidth / 2 + config.padding
