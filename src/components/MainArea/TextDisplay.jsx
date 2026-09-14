@@ -4,7 +4,7 @@ import { FaRegMoon } from "react-icons/fa";
 import { useContext, useRef, useEffect } from 'react';
 import { AppContext } from '../../context.jsx';
 
-const TextDisplay = ({ commonStyle }) => {
+const TextDisplay = () => {
     const { history, currentChatId } = useContext(AppContext);
     const ref = useRef(null)
 
@@ -19,16 +19,15 @@ const TextDisplay = ({ commonStyle }) => {
 
     return (
         <div className='
-            pt-20 pb-50
-            w-full
+            pt-20 pb-50 
             flex flex-col items-center gap-12
             '>
             {currentChat && currentChat.messages.map((e, index) => (
                 <div key={index}
                     ref={index === currentLastMessageIndex ? ref : null}
                     className={`
-                            flex flex-col gap-12
-                            ${commonStyle.width}`}>
+                            flex flex-col gap-12 w-full
+                          `}>
                     <div className='
                             self-end
                             bg-blue-200
