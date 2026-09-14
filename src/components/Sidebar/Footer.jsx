@@ -8,7 +8,7 @@ const Footer = ({ commonStyle, shouldShowContent }) => {
 
   return (
     <div className={`${commonStyle.padding} border-t ${commonStyle.borderColor}`} >
-      <a href='https://github.com/tomoya0813'
+      <a href='https://github.com/tomoya0813' target="_blank"
         className={`flex items-center gap-2 ${commonStyle.hover}  ${commonStyle.borderRadius}`}>
         <FaGithub size={27} className="shrink-0" />
 
