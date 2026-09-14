@@ -4,15 +4,7 @@ import { useState, useEffect } from "react";
 export const AppContext = createContext();
 
 function ContextProvider({ children }) {
-    const [history, setHistory] = useState([]);
-    const [currentChatId, setCurrentChatId] = useState('start');
-    const [sidebarIsOpened, setSidebarIsOpened] = useState(true);
-
-    const [texts, setTexts] = useState({ start: '' });
-    const setCurrentTexts = (value) => {
-        setTexts({ ...texts, [currentChatId]: value })
-    }
-
+    const breakpoint = 768;
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     useEffect(() => {
@@ -21,6 +13,21 @@ function ContextProvider({ children }) {
         return () => window.removeEventListener('resize', handleResize);
     }, [])
 
+    const isMobile = windowWidth < breakpoint;
+
+    const [history, setHistory] = useState([]);
+    const [currentChatId, setCurrentChatId] = useState('start');
+    const [sidebarIsOpened, setSidebarIsOpened] = useState(!isMobile);
+
+    const [texts, setTexts] = useState({ start: '' });
+    const setCurrentTexts = (value) => {
+        setTexts({ ...texts, [currentChatId]: value })
+    }
+
+
+
+
+
 
     return (
         <AppContext.Provider value={{
@@ -28,7 +35,7 @@ function ContextProvider({ children }) {
             currentChatId, setCurrentChatId,
             sidebarIsOpened, setSidebarIsOpened,
             texts, setCurrentTexts,
-            windowWidth
+            windowWidth, breakpoint, isMobile
         }}>
             {children}
         </AppContext.Provider>
