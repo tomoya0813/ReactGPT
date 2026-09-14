@@ -42,7 +42,7 @@ const Sidebar = ({ sidebarTransition, sidebarTransitionTime }) => {
   }
 
   return (
-    < div className='h-full flex flex-col justify-between' >
+    <div className='h-full flex flex-col justify-between' >
       <Header commonStyle={commonStyle} shouldShowContent={shouldShowContent} handleMobileSidebar={handleMobileSidebar} />
       <ChatHistory className={`flex-1 overflow-y-auto`} commonStyle={commonStyle} shouldShowContent={shouldShowContent} handleMobileSidebar={handleMobileSidebar} />
       <Footer commonStyle={commonStyle} shouldShowContent={shouldShowContent} />
